@@ -33,15 +33,15 @@ const usuariosPost = async ( req = request, res = response ) => {
  const { nombre, correo, password, rol } = req.body;
  const usuario = new Usuario( { nombre, correo, password, rol } );
 
- // Encriptar la contraseña
+ //! Encriptar la contraseña
  const salt = bcryptjs.genSaltSync();
  usuario.password = bcryptjs.hashSync( password, salt );
 
- // Guardar en BD
+ //* Guardar en BD
  await usuario.save();
 
  res.json( {
-  //msg: 'post API - controlador',
+  //*msg: 'post API - controlador',
   usuario
  } );
 };
@@ -53,7 +53,7 @@ const usuariosPut = async ( req = request, res = response ) => {
 
  //ToDo validar contra base de datos
  if ( password ) {
-  // Encriptar la contraseña
+  //! Encriptar la contraseña
   const salt = bcryptjs.genSaltSync();
   resto.password = bcryptjs.hashSync( password, salt );
 
@@ -75,8 +75,8 @@ const usuariosDelete = async ( req = request, res = response ) => {
 
  const { id } = req.params;
 
- //Borrado Fisico en Mongoose
- // const usuario = await Usuario.findByIdAndDelete( id );
+ //!Borrado Fisico en Mongoose
+ //* const usuario = await Usuario.findByIdAndDelete( id );
 
  const usuario = await Usuario.findByIdAndUpdate( id, { estado: false } );
 
